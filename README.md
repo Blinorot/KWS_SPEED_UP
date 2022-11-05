@@ -42,7 +42,15 @@ To download weights run the following command:
 python3 scripts/get_weights.py
 ```
 
-## Copression\Speed Up Methods
+The weights will be downloaded to `saved` folder, which structure is the following:
+
+-   `torch` subfolder contains different model checkpoints for basic non-streaming model
+
+-   `jit` subfolder contains streaming versions
+
+Each subfoled is divided into two parts: `original` and `speed_up`. The first one contains original models, and the second one -- after compression\speed_up methods.
+
+## Compression\Speed Up Methods
 
 The notebook `KWS_SPEED_UP.ipynb` contains implementation of the following speed_up or
 compression methods:
