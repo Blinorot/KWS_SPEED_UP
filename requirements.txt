@@ -3,7 +3,10 @@ torchvision~=0.13.0
 numpy
 tqdm
 matplotlib
+seaborn
 pandas
+jupyter
+thop
 
 speechbrain~=0.5.12
 wandb
