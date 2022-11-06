@@ -66,6 +66,8 @@ if __name__ == "__main__":
 
     args = args.parse_args()
 
+    assert args.chunk >= 4000, "Chunk size should be not less than 4000"
+
     model = torch.jit.load(args.model, map_location='cpu').eval()
 
     ctx = mp.get_context("spawn")

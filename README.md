@@ -64,9 +64,11 @@ compression methods:
 -   Dynamic Quantization for GRU\Linear
 -   DepthWise Separable Convolution instead of Conv2d
 
-The final model has `speed_up_rate=9.315`, `compression_rate=8.3044`. It's PyTorch version is located in `saved/torch/speed_up/pruned_conv_distil_ft.pth` (PyTorch version needs extra Dynamic Quantization after loading, see sections 9 and 10 of the notebook). It's streaming JIT version is located in `saved/jit/speed_up/distil_kws_buffer_{1,2,3}.pth` with different buffer sizes (1 is recommended).
+The final model has `speed_up_rate=9.315`, `compression_rate=10.262`. It's PyTorch version is located in `saved/torch/speed_up/pruned_conv_distil_ft.pth` (PyTorch version needs extra Dynamic Quantization after loading, see sections 9 and 10 of the notebook). It's streaming JIT version is located in `saved/jit/speed_up/distil_kws_buffer_{1,2,3}.pth` with different buffer sizes (1 is recommended for chunk_size 8000).
 
 ## Streaming
+
+Several models have streaming mode. It is done by wrapping the model into streaming class and processing data chunk by chunk. The important parameter of wrapper is `buffer_size`: the amount of chunks which will be used for attention layer and final classifier. The speed and quality of the model depends on both chunk and buffer sizes.
 
 `stream.py` allows users to test the model on their own laptops with their microphones. To run the script run the following command:
 
@@ -80,7 +82,7 @@ python3 stream.py -s STREAM_READER_SOURCE_DEVICE\
 
 The source and format depends on your system settings. See `python3 stream.py -h` and ffmpeg website for details.
 
-The keyword is `sheila`.
+The keyword is `sheila`. Chunk size should be not less than 4000.
 
 **Note:** the command may sometimes lag for first 1-5 seconds at the start.
 
